@@ -33,7 +33,6 @@ UniversalTelegramBot bot(BOTtoken, client);         // Inicializa o bot do Teleg
 
 int Bot_mtbs = 1000;                                // define o tempo entre a leitura das mensagens do bot
 long Bot_lasttime;                                  // Armazena o tempo da última mensagem recebida
-//bool Start = false;                                 // Variável booleana usada para controlar o início
 String texto = "";                                  // Variável para armazenar a mensagem recebida pelo SerialPort (Arduino)
 String textoArduino = "";                           // Variável para armazenar a mensagem recebida pelo SerialPort (Arduino)
 const int intervalo = 1000;                         // Defina a frequência de amostragem (em milissegundos)
