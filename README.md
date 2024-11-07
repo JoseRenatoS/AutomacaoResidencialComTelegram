@@ -4,7 +4,7 @@
   <img src="http://img.shields.io/static/v1?label=STATUS&message=ANDAMENTO&color=GREEN&style=for-the-badge"/>
 </p>
 
-![Protótipo do Sistema de Automação Residencial](https://github.com/user-attachments/assets/55904fd8-2cf4-450c-af4d-502fff1fba2c)
+![Protótipo do Sistema de Automação Residencial](https://github.com/user-attachments/assets/9d1d2e78-9b45-4ee9-9de9-100d98b397a6)
 > Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
 
 
