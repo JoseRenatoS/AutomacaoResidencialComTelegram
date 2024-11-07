@@ -157,7 +157,6 @@ void setup() {
   digitalWrite(irrigador, LOW);             // pino 4 - baixo
   digitalWrite(LedRed, LOW);                // pino 5 - baixo
   digitalWrite(buzzer, LOW);                // pino 5 - baixo
-
   delay(3000);                              // Atraso de 3 segundos
 }
 
