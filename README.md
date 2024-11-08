@@ -11,26 +11,26 @@
 
 
 
-## ℹ Índice 
-* [:house: Descrição do Projeto](#-descrição-do-projeto)
-* [:toolbox: Materiais](#-materiais)
+## :information_source: Índice 
+* [:house: Descrição do Projeto](#house-descrição-do-projeto)
+* [:toolbox: Materiais](#toolbox-materiais)
 * [:hammer: Funcionalidades do projeto](#hammer-funcionalidades-do-projeto)
-* [:computer: Pré-Requisitos](#-pré-requisitos)
-* [:memo: Licença](#-licença)
-* [:bookmark_tabs: Referências](#-referencia)
+* [:computer: Pré-Requisitos](#computer-pré-requisitos)
+* [:memo: Licença](#memo-licença)
+* [:bookmark_tabs: Referências](#bookmark_tabs-referências)
 <br><br><br><br><br>
 
 
 
 
 
-## 🏠 Descrição do Projeto
+## :house: Descrição do Projeto
 Trata-se do Trabalho de Conclusão de Curso, do Curso de Engenharia Elétrica. Foi desenvolvimento o protótipo de um sistema de automação residencial que pode ser controlado pelo aplicativo de comunicação Telegram.
 <br><br><br><br><br>
 
 
 
-## 🧰 Materiais
+## :toolbox: Materiais
 <br><br><br><br><br>
 
 
@@ -49,7 +49,7 @@ Trata-se do Trabalho de Conclusão de Curso, do Curso de Engenharia Elétrica. F
 
 
 
-## 💻 Pré-requisitos
+## :computer: Pré-requisitos
 
 Para utilizar o projeto, alguns requisitos são necessário:
 
@@ -60,8 +60,8 @@ Para utilizar o projeto, alguns requisitos são necessário:
 
 
 
-## 📝 Licença
+## :memo: Licença
 
 
 
-## 📑 Referências
+## :bookmark_tabs: Referências
