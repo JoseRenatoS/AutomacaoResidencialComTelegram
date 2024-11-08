@@ -15,7 +15,7 @@
 * [:house: Descrição do Projeto](#house-descrição-do-projeto)
 * [:hammer: Funcionalidades do projeto](#hammer-funcionalidades-do-projeto)
 * [:computer: Pré-Requisitos](#computer-pré-requisitos)
-* [:toolbox: Materiais & Custos](#toolbox-materiais-&-custos)
+* [:toolbox: Materiais & Custos](#toolbox-materiais--custos)
 * [:memo: Licença](#memo-licença)
 * [:bookmark_tabs: Referências](#bookmark_tabs-referências)
 <br><br><br><br><br>
@@ -56,28 +56,39 @@ Para utilizar o projeto, alguns requisitos são necessário:
 
 
 ## :toolbox: Materiais & Custos
-| Coluna 1 | Coluna 2 | Coluna 3 | Coluna 4 |
-|----------|----------|----------|----------|
-| Linha 1  | Conteúdo | Conteúdo | Conteúdo |
-| Linha 2  | Conteúdo | Conteúdo | Conteúdo |
-| Linha 3  | Conteúdo | Conteúdo | Conteúdo |
-| Linha 4  | Conteúdo | Conteúdo | Conteúdo |
-| Linha 5  | Conteúdo | Conteúdo | Conteúdo |
-| Linha 6  | Conteúdo | Conteúdo | Conteúdo |
-| Linha 7  | Conteúdo | Conteúdo | Conteúdo |
-| Linha 8  | Conteúdo | Conteúdo | Conteúdo |
-| Linha 9  | Conteúdo | Conteúdo | Conteúdo |
-| Linha 10 | Conteúdo | Conteúdo | Conteúdo |
-| Linha 11 | Conteúdo | Conteúdo | Conteúdo |
-| Linha 12 | Conteúdo | Conteúdo | Conteúdo |
-| Linha 13 | Conteúdo | Conteúdo | Conteúdo |
+| Componentes | Preço Unitário (R$) | Quantidade | Preço (R$) |
+|----------|:----------:|:----------:|:----------:|
+| ESP32 Doit DevKitC V4 WROOM-32D  | 62,04 | 1 | 62,04 |
+| Arduino Uno R3  | 46,90 | 1 | 46,90 |
+| Sensor de Movimento Infravermelho  (PIR)  | 7,90 | 1 | 7,90 |
+| Sensor de Chama  | 4,90 | 1 | 4,90 |
+| Sensor de Gás de Cozinha e Gás Natural (MQ-6)  | 13,90 | 1 | 13,90 |
+| Sensor de Umidade e de Temperatura (DTH11)  | 8,90 | 1 | 8,90 |
+| Módulo Sensor de Umidade do Solo  | 10,90 | 1 | 10,90 |
+| Módulo LDR | 6,72 | 1 | 6,72 |
+| Display LCD 16x2 | 15,00 | 1 | 15,00 |
+| Módulo Serial I2C | 6,90 | 1 | 6,90 |
+| Mini Cooler 5V 25x25mm  | 17,61 | 2 | 35,22 |
+| Mini Bomba de Água Submersa 3V-5V | 14,10 | 1 | 14,10 |
+| Buzzer ativo | 2,51 | 1 | 2,51 |
+| LED | 0,25 | 7 | 1,75 |
+| Transistores NPN BC547 | 0,35 | 4 | 1,40 |
+| Resistores de 10kΩ | 0,15 | 6 | 0,90 |
+| Resistores de 2kΩ | 0,29 | 1 | 0,29 |
+| Protoboard 830 pinos | 12,90 | 3 | 38,70 |
+| Protoboard 170 pinos | 3,90 | 2 | 7,80 |
+| Fonte Bivolt 9V/1A | 11,52 | 2 | 23,04 |
+| Fonte Ajustável para Protoboard | 8,12 | 2 | 16,34 |
+| **TOTAL**              ||| **R$ 326,11** |
+<br>
 
+:exclamation: **OBS:** *os valores podem ser diferentes a depender de diversos fatores (como as lojas, época, inflação, etc.).*
 <br><br><br><br><br>
 
 
 
-
 ## :memo: Licença
+<br><br><br><br><br>
 
 
 
