@@ -26,6 +26,8 @@
 
 ## :house: Descrição do Projeto
 Trata-se do Trabalho de Conclusão de Curso, do Curso de Engenharia Elétrica. Foi desenvolvimento o protótipo de um sistema de automação residencial que pode ser controlado pelo aplicativo de comunicação Telegram.
+- *arquivo "TCCArduinoESP32.ino" é o código usado no Arduino*
+- *arquivo "TCCESP32Arduino.ino" é o código usado no ESP32*
 <br><br><br><br><br>
 
 
