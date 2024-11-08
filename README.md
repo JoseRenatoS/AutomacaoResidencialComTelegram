@@ -11,11 +11,11 @@
 <br><br><br><br><br>
 
 
-## :information_source: Índice 
+## :round_pushpin: Índice 
 * [:house: Descrição do Projeto](#house-descrição-do-projeto)
-* [:toolbox: Materiais](#toolbox-materiais)
 * [:hammer: Funcionalidades do projeto](#hammer-funcionalidades-do-projeto)
 * [:computer: Pré-Requisitos](#computer-pré-requisitos)
+* [:toolbox: Materiais & Custos](#toolbox-materiais-&-custos)
 * [:memo: Licença](#memo-licença)
 * [:bookmark_tabs: Referências](#bookmark_tabs-referências)
 <br><br><br><br><br>
@@ -26,11 +26,6 @@
 
 ## :house: Descrição do Projeto
 Trata-se do Trabalho de Conclusão de Curso, do Curso de Engenharia Elétrica. Foi desenvolvimento o protótipo de um sistema de automação residencial que pode ser controlado pelo aplicativo de comunicação Telegram.
-<br><br><br><br><br>
-
-
-
-## :toolbox: Materiais
 <br><br><br><br><br>
 
 
@@ -57,6 +52,28 @@ Para utilizar o projeto, alguns requisitos são necessário:
 - Você tem uma máquina `<Windows / Linux / Mac>`. Indique qual sistema operacional é compatível / não compatível.
 - Você leu `<guia / link / documentação_relacionada_ao_projeto>`.
 <br><br><br><br><br>
+
+
+
+## :toolbox: Materiais & Custos
+| Coluna 1 | Coluna 2 | Coluna 3 | Coluna 4 |
+|----------|----------|----------|----------|
+| Linha 1  | Conteúdo | Conteúdo | Conteúdo |
+| Linha 2  | Conteúdo | Conteúdo | Conteúdo |
+| Linha 3  | Conteúdo | Conteúdo | Conteúdo |
+| Linha 4  | Conteúdo | Conteúdo | Conteúdo |
+| Linha 5  | Conteúdo | Conteúdo | Conteúdo |
+| Linha 6  | Conteúdo | Conteúdo | Conteúdo |
+| Linha 7  | Conteúdo | Conteúdo | Conteúdo |
+| Linha 8  | Conteúdo | Conteúdo | Conteúdo |
+| Linha 9  | Conteúdo | Conteúdo | Conteúdo |
+| Linha 10 | Conteúdo | Conteúdo | Conteúdo |
+| Linha 11 | Conteúdo | Conteúdo | Conteúdo |
+| Linha 12 | Conteúdo | Conteúdo | Conteúdo |
+| Linha 13 | Conteúdo | Conteúdo | Conteúdo |
+
+<br><br><br><br><br>
+
 
 
 
