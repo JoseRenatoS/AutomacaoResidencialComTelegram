@@ -12,12 +12,12 @@
 
 
 ## ℹ Índice 
-* [:house: Descrição do Projeto](#house-descrição-do-projeto)
-* [:toolbox: Materiais](#toolbox-materiais)
+* [:house: Descrição do Projeto](#-descrição-do-projeto)
+* [:toolbox: Materiais](#-materiais)
 * [:hammer: Funcionalidades do projeto](#hammer-funcionalidades-do-projeto)
-* [:computer: Pré-Requisitos](#computer-pré-requisitos)
-* [:memo: Licença](#memo-licença)
-* [:bookmark_tabs: Referências](#bookmark_tabs-referencia)
+* [:computer: Pré-Requisitos](#-pré-requisitos)
+* [:memo: Licença](#-licença)
+* [:bookmark_tabs: Referências](#-referencia)
 <br><br><br><br><br>
 
 
