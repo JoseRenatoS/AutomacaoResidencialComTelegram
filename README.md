@@ -8,7 +8,7 @@
   <img src="https://github.com/user-attachments/assets/2aef1242-0a4b-43fe-b11e-9ba5767dd0ac" width="650" height="500"/>
 </p>
 <p align="center">Figura 1: Protótipo do Sistema de Automação Residencial</p>
-<br><br><br><br><br>
+<br><br>
 
 
 ## :round_pushpin: Índice 
