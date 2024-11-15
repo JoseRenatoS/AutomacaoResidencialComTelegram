@@ -16,15 +16,15 @@ HardwareSerial SerialPort(2);                       // determina o pino 16 como 
 #define ID_CHAT "IDTelegramUsuario"                                               // define "ID_CHAT" com a ID do Telegram do usuario
 
 
-#define sensorChama 34                              // pino 34 - sensor de chama
-#define sensorGas 12                                // pino 25 - sensor de gás
-#define sensorUmidadeSolo 26                        // pino 26 - sensor de umidade do solo
-#define sensorMovimento 14                          // pino 14 - sensor de movimento
-#define moduloLDR 27                                // pino 27 - modelo LDR (lógico) - interno
+#define sensorChama 39                              // pino 39 - sensor de chama (digital)
+#define sensorGas 35                                // pino 35 - sensor de gás (analógico)
+#define sensorUmidadeSolo 34                        // pino 34 - sensor de umidade do solo (analógico)
+#define sensorMovimento 14                          // pino 14 - sensor de movimento (digital)
+#define sensorLDR 36                                // pino 36 - sensor LDR (analógico)
 #define salaLuz 5                                   // pino  5 - luz da sala
 #define cozinhaLuz 21                               // pino 21 - luz da cozinha
 #define quartoLuz 22                                // pino 22 - luz do quarto
-#define banheiroLuz 23                              // pino 23 - luz do banheiro
+#define banheiroLuz 2                               // pino  2 - luz do banheiro
 #define areaLuz 33                                  // pino 33 - luz da área de serviço
 #define quintalLuz 32                               // pino 32 - luz do quintal
 
@@ -36,16 +36,16 @@ long Bot_lasttime;                                  // Armazena o tempo da últi
 String texto = "";                                  // Variável para armazenar a mensagem recebida pelo SerialPort (Arduino)
 String textoArduino = "";                           // Variável para armazenar a mensagem recebida pelo SerialPort (Arduino)
 const int intervalo = 1000;                         // Defina a frequência de amostragem (em milissegundos)
-volatile int count;                                 // Contador de pulsos
+
 
 
 
 // VARIÁVEIS USADAS PARA ARMAZENAR O ESTADO DOS SENSORES
 int state_Sensor_Movimento;                         // armazena o estado do sensor de movimento
-int state_Sensor_Gas;                               // armazena o estado do sensor de gás
 int state_Sensor_Chama;                             // armazena o estado do sensor de chama
-int state_Sensor_Umidade_Solo;                      // armazena o estado do sensor de umidade do solo
-int state_modulo_LDR;                               // armazena o estado do módulo LDR (digital)
+int state_Sensor_Gas = 0;                           // armazena o valor do sensor de gás
+int state_Sensor_Umidade_Solo 0;                    // armazena o valor do sensor de umidade do solo
+int state_LDR = 0;                                  // armazena o valor do sensor LDR
 
 
 // VARIÁVEIS USADAS PARA ARMAZENAR O ESTADO DA ILUMINAÇÃO DE CADA CÔMODO
@@ -148,7 +148,7 @@ void handleNewMessages(int numNewMessages) {                     // Declaração
 
 
 
-      if (state_Sensor_Gas == 1) {                                                    // Verifica se o sensor vazamento de gás na cozinha
+      if (state_Sensor_Gas >= 35) {                                                   // Verifica o valor do sensor vazamento de gás na cozinha, se foi detectado gás
         welcome += "ALERTA: Vazamento de Gás detectado\n";                            // Adiciona mensagem indicando que foi detectado vazamento de gás na cozinha                    
       } else {                                                                        // Caso contrário, se não foi detectado vazamento de gás na cozinha
         welcome += "Ambiente seguro: SEM vazamento de gás\n";                         // Adiciona mensagem indicando que não foi detectado vazamento de gás na cozinha                 
@@ -163,7 +163,7 @@ void handleNewMessages(int numNewMessages) {                     // Declaração
       } else {                                                                        // Caso contrário, se não foi detectado movimento
         welcome += "Área segura: nenhum movimento detectado\n";                       // Adiciona mensagem indicando que não foi detectado movimento no quintal              
       }
-      if (state_Sensor_Umidade_Solo == 1) {                                           // Verifica o estado do SENSOR DE UMIDADE DO SOLO, indicando se o solo está seco
+      if (state_Sensor_Umidade_Solo > 70) {                                           // Verifica o valor do SENSOR DE UMIDADE DO SOLO, indicando se o solo está seco
         welcome += "ALERTA: Solo seco\n\n";                                           // Adiciona mensagem indicando que a Iluminação da Sala está ligada                          
       } else {                                                                        // Caso contrário, se
         welcome += "Solo úmido\n\n";                                                  // Adiciona mensagem indicando que a Iluminação da Sala está desligada                
@@ -318,10 +318,14 @@ void envioMensagem(const String& mensagem) {                    // Define a fun�
 
 // FUNÇÃO USADA PARA O SISTEMA DE VAZAMENTO DE GÁS
 void vazamentoDeGas() {
-  Serial.println("estado do Sensor de Gás: " + String(state_Sensor_Gas));   // exibe no monitor serial o estado atual do sensor de gás
+  // verifica se o SISTEMA DE VAZAMENTO DE GÁS está ativado (state_Sistema_Gas = 1) ou desativado (state_Sistema_Gas = 0). Caso esteja desativado não é realizado nada, 
+  // caso esteja ativado, verifica se o sensor de gás detectou vazamento de gás (valores acima de 35) e verifica a variável "vazamento_Gas_Anterior" (responsável por determinar se o bloco já foi executado uma vez ou não)
+  // caso não tenha sido executado, será executado (1x) o primeiro bloco
+  // caso já tenha sido executado, não é realizado nada
+  // caso não seja mais detectado vazamento de gás (valores abaixo de 35), o segundo bloco é executado (1x)
   
   if(state_Sistema_Gas == 1) {
-    if(state_Sensor_Gas == 1 && vazamento_Gas_Anterior == false) {
+    if(state_Sensor_Gas >= 35 && vazamento_Gas_Anterior == false) {
       SerialPort.println("led_red_on");                                     // Envia o comando "led_red_on" para o Arduino via UART2, para acionar o LED VERMELHO DE EMERGÊNCIA
       delay(250);                                                           // atraso de 250 milissegundos
       SerialPort.println("ventila_cozinha_on");                             // Envia o comando "ventila_cozinha_on" para o Arduino via UART2, para ligar a ventilação da cozinha
@@ -329,7 +333,7 @@ void vazamentoDeGas() {
       SerialPort.println("buzzer");                                         // Envia o comando "buzzer" para o Arduino via UART2, para emitir um alarme sonoro
       envioMensagem("Vazamento de Gás Detectado!");                         // Envia a mensagem para o Telegram
       vazamento_Gas_Anterior = true;                                        // Atualiza a variavel "vazamento_Gas_Anterior"
-    } else if (state_Sensor_Gas == 0 && vazamento_Gas_Anterior == true) {
+    } else if (state_Sensor_Gas < 35 && vazamento_Gas_Anterior == true) {
       SerialPort.println("led_red_off");                                    // Envia o comando "led_red_off" para o Arduino via UART2, para desativar o LED VERMELHO DE EMERGÊNCIA
       delay(250);                                                           // atraso de 250 milissegundos
       SerialPort.println("ventila_cozinha_off");                            // Envia o comando "ventila_cozinha_off" para o Arduino via UART2, para desligar a ventilação da cozinha
@@ -345,7 +349,13 @@ void vazamentoDeGas() {
 
 // FUNÇÃO USADA PARA O SISTEMA DE INCÊNDIO
 void alarmeDeIncendio() {
-  Serial.println("estado do sensor de chama: " + String(state_Sensor_Chama)); // exibe no monitor serial o estado atual do sensor de chama
+  Serial.println("estado do sensor de chama: " + String(state_Sensor_Chama));     // exibe no monitor serial o estado atual (1 ou 0) do sensor de chama
+  
+
+  // Verifica se o sensor de chama detectou chama (state_Sensor_Chama = 1) e verifica a variável "chama_Anterior" (responsável por determinar se o bloco já foi executado uma vez ou não)
+  // caso não tenha sido executado, será executado (1x) o primeiro bloco
+  // caso já tenha sido executado, não é realizado nada
+  // caso não seja mais detectado chama (state_Sensor_Chama = 0), o segundo bloco é executado (1x)
   
   if(state_Sensor_Chama == 0 && chama_Anterior == false) {
     SerialPort.println("led_red_on");                                       // Envia o comando "led_red_on" para o Arduino via UART2, para acionar o LED VERMELHO DE EMERGÊNCIA
@@ -367,15 +377,19 @@ void alarmeDeIncendio() {
 
 // FUNÇÃO USADA PARA O SISTEMA DE IRRIGAÇÃO DO JARDIM
 void irrigacao() {
-  Serial.println("estado do sensor de Umidade do Solo: " + String(state_Sensor_Umidade_Solo));
+  // verifica se o SISTEMA DE IRRIGAÇÃO está ativado (state_Sistema_Irrigacao = 1) ou desativado (state_Sistema_Irrigacao = 0). Caso esteja desativado não é realizado nada, 
+  // caso esteja ativado, verifica se o sensor de umidade do solo detectou se o solo está seco (valores acima de 70) e verifica a variável "irrigacao_Anterior" (responsável por determinar se o bloco já foi executado uma vez ou não)
+  // caso não tenha sido executado, será executado (1x) o primeiro bloco
+  // caso já tenha sido executado, não é realizado nada
+  // caso não seja mais detectado solo seco, apenas solo úmido (valores abaixo de 70), o segundo bloco é executado (1x)
   
   if(state_Sistema_Irrigacao == 1) {
-    if(state_Sensor_Umidade_Solo == 1 && irrigacao_Anterior == false) {
+    if(state_Sensor_Umidade_Solo > 70 && irrigacao_Anterior == false) {
       SerialPort.println("irrigador_on");                                  // Envia o comando "irrigador_on" para o Arduino via UART2, para acionar o irrigador
       delay(250);                                                          // atraso de 250 milissegundos
       envioMensagem("Solo seco - Irrigador ativado.");                     // Envia a mensagem para o Telegram 
       irrigacao_Anterior = true;                                           // Atualiza o estado da variavel "irrigacao_Anterior"
-    } else if (state_Sensor_Umidade_Solo == 0 && irrigacao_Anterior == true) {
+    } else if (state_Sensor_Umidade_Solo <= 70 && irrigacao_Anterior == true) {
       SerialPort.println("irrigador_off");                                 // Envia o comando "irrigador_off" para o Arduino via UART2, para acionar o irrigador
       delay(250);                                                          // atraso de 250 milissegundos
       envioMensagem("Solo úmido - Irrigador desativado.");                 // Envia a mensagem para o Telegram
@@ -392,6 +406,12 @@ void alarmeMovimento() {
   Serial.println("estado do Alarme: " + String(state_Sistema_Alarme));
   Serial.println("estado do Sensor de Movimento: " + String(state_Sensor_Movimento));
 
+  
+  // verifica se o ALARME DE MOVIMENTO está ativado (state_Sistema_Alarme = 1) ou desativado (state_Sistema_Alarme = 0). Caso esteja desativado não é realizado nada, 
+  // caso esteja ativado, verifica se o sensor PIR detectou movimento (1) e verifica a variável "alarme_Anterior" (responsável por determinar se o bloco já foi executado uma vez ou não)
+  // caso não tenha sido executado, será executado (1x) o primeiro bloco
+  // caso já tenha sido executado, não é realizado nada
+  // caso não seja mais detectado movimento (state_Sensor_Movimento = 0), o segundo bloco é executado (1x)
   if(state_Sistema_Alarme == 1) {
     if(state_Sensor_Movimento == 1 && alarme_Anterior == false) {
       envioMensagem("Detectado movimento no quintal");                           // Envia a mensagem para o Telegram
@@ -411,27 +431,33 @@ void alarmeMovimento() {
 
 // FUNÇÃO USADA PARA O SISTEMA DE ILUMINAÇÃO EXTERNA
 void iluminacaoExterna() {
-  Serial.println("estado do modulo LDR: " + String(state_modulo_LDR));                                    // exibe o nível lógico da variável do sensor: 1 (escuro) 0 (claro)
-  Serial.println("estado do Sistema de Iluminação Externa: " + String(state_Sistema_Luz_Externa));        // exibe o nível lógico da variável do sistema de iluminação externa
+  Serial.println("estado do Sistema de Iluminação Externa: " + String(state_Sistema_Luz_Externa));        // exibe o nível lógico (1 - ativado | 0 - desativado) da variável do sistema de iluminação externa                       
+  // state_LDR <= 65         AMBIENTE ESCURO
+  // state_LDR > 65          AMBIENTE CLARO
+  // verifica se o SISTEMA DE ILUMINAÇÃO EXTERNO está ativado (state_Sistema_Luz_Externa = 1) ou desativado (state_Sistema_Luz_Externa = 0). Caso esteja desativado não é realizado nada, 
+  // caso esteja ativado, verifica se foi detectado movimento pelo sensor PIR e se o LDR apresenta valores que indicam ambiente com pouca luminosidade (abaixo de 65) e verifica a variável "state_Luz_Quintal" (responsável por determinar se o bloco já foi executado uma vez ou não)
+  // caso não tenha sido executado, será executado (1x) o primeiro bloco
+  // caso já tenha sido executado, não é realizado nada
+  // caso não seja mais detectado movimento e/ou o LDR indique que o ambiente está bem iluminado (valor acima de 65), um dos 3 últimos blocos será executado (apagado a iluminação do quintal)
                                
 
   if(state_Sistema_Luz_Externa == 1) {
-    if(state_Sensor_Movimento == 1  &&  state_modulo_LDR == 1  &&  state_Luz_Quintal == false) {
+    if(state_Sensor_Movimento == 1  &&  state_LDR <= 65  &&  state_Luz_Quintal == false) {
       digitalWrite(quintalLuz, HIGH);
       delay(200);
       envioMensagem("Iluminação do Quintal ativada");
       state_Luz_Quintal = true;
-    } else if (state_Sensor_Movimento == 1  &&  state_modulo_LDR == 0  &&  state_Luz_Quintal == true) {
+    } else if (state_Sensor_Movimento == 1  &&  state_LDR > 65  &&  state_Luz_Quintal == true) {
       digitalWrite(quintalLuz, LOW);
       delay(200);
       envioMensagem("Iluminação do Quintal desativada");
       state_Luz_Quintal = false;
-    } else if (state_Sensor_Movimento == 0  &&  state_modulo_LDR == 1  &&  state_Luz_Quintal == true) {
+    } else if (state_Sensor_Movimento == 0  &&  state_LDR <= 65  &&  state_Luz_Quintal == true) {
       digitalWrite(quintalLuz, LOW);
       delay(200);
       envioMensagem("Iluminação do Quintal desativada");
       state_Luz_Quintal = false;
-    } else if (state_Sensor_Movimento == 0  &&  state_modulo_LDR == 0  &&  state_Luz_Quintal == true) {
+    } else if (state_Sensor_Movimento == 0  &&  state_LDR > 65  &&  state_Luz_Quintal == true) {
       digitalWrite(quintalLuz, LOW);
       delay(200);
       envioMensagem("Iluminação do Quintal desativada");
@@ -469,15 +495,12 @@ void setup() {
   SerialPort.begin(9600, SERIAL_8N1, 16, 17);    // Inicializa a comunicação serial em uma taxa de 9600 bps usando os pinos 16 (RX) e 17 (TX) do ESP32
 
 
-  pinMode(sensorChama, INPUT);                   // pino 34 - entrada lógica
-  pinMode(sensorGas, INPUT);                     // pino 35 - entrada lógica
-  pinMode(sensorUmidadeSolo, INPUT);             // pino 39 - entrada lógica
-  pinMode(sensorMovimento, INPUT);               // pino 36 - entrada lógica
-  pinMode(moduloLDR, INPUT);                     // pino 27 - entrada lógica
+  pinMode(sensorChama, INPUT);                   // pino 39 - entrada lógica
+  pinMode(sensorMovimento, INPUT);               // pino 19 - entrada lógica
   pinMode(salaLuz, OUTPUT);                      // pino  5 - saída
   pinMode(cozinhaLuz, OUTPUT);                   // pino 21 - saída
   pinMode(quartoLuz, OUTPUT);                    // pino 22 - saída
-  pinMode(banheiroLuz, OUTPUT);                  // pino 23 - saída
+  pinMode(banheiroLuz, OUTPUT);                  // pino  2 - saída
   pinMode(areaLuz, OUTPUT);                      // pino 33 - saída
   pinMode(quintalLuz, OUTPUT);                   // pino 32 - saída
 
@@ -489,12 +512,24 @@ void setup() {
 
 
 void loop() {
-  Serial.println("\n\n\nINÍCIO DA ITERAÇÃO");                     // exibe no monitor serial "INICIO DA ITERACAO"
-  state_Sensor_Gas = digitalRead(sensorGas);                      // Lê o estado do sensor de gás e armazena na variável
+  // Armazena nas variaveis, os valores analógicos lidos (0 a 4095) nos sensores de umidade, de gás e LDR 
+  // E depois exibe no monitor serial os valores lidos (0 a 4095) de cada sensor
+  state_Sensor_Umidade_Solo = analogRead(sensorUmidadeSolo);
+  state_Sensor_Gas = analogRead(sensorGas);
+  state_LDR = analogRead(sensorLDR);
+  Serial.println("VALOR UMIDADE SOLO: " + String(state_Sensor_Umidade_Solo) + "\nVALOR GÁS: " + String(state_Sensor_Gas) + "\nVALOR LDR: " + String(state_LDR));
+
+
+  // Mapeia os valores lido dos sensor de umidade do solo, de gás e do LDR (0 a 4095) para uma escala percentual (0 a 100)
+  // E depois exibe no monitor serial os valores mapeados (0 a 100) de cada sensor
+  state_Sensor_Umidade_Solo = map(state_Sensor_Umidade_Solo, 0, 4095, 0, 100);         
+  state_Sensor_Gas = map(state_Sensor_Gas, 0, 4095, 0, 100);                             
+  state_LDR = map(state_LDR, 0, 4095, 0, 100);                                           
+  Serial.println("valor umidade solo: " + String(state_Sensor_Umidade_Solo) + "\nvalor gás: " + String(state_Sensor_Gas) + "\nvalor ldr: " + String(state_LDR));              
+
+
   state_Sensor_Chama = digitalRead(sensorChama);                  // Lê o estado do sensor de chama e armazena na variável
-  state_Sensor_Umidade_Solo = digitalRead(sensorUmidadeSolo);     // Lê o estado do sensor de umidade do solo e armazena na variável
   state_Sensor_Movimento = digitalRead(sensorMovimento);          // Lê o estado do sensor de movimento e armazena na variável
-  state_modulo_LDR = digitalRead(moduloLDR);                      // 1 (escuro) 0 (claro)
   
 
   // FUNÇÕES CHAMADAS
