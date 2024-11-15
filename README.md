@@ -50,10 +50,10 @@ Trata-se do Trabalho de Conclusão de Curso, do Curso de Engenharia Elétrica. F
 
 Para utilizar o projeto, alguns requisitos são necessário:
 
-- Ter um computador para realizar qualquer alteração necessária no código-fonte, e para transferir os códigos para os microcontroladores.
-- Ter uma conta e o aplicativo do Telegram instalado no smartphone.
-- Criar um Bot e ter a chave Token dele (utilize o BotFather para realizar a criação do seu bot)
-- Identificar o seu ID da conta do Telegram (utilize o IDBot para identificar seu ID)
+- Ter um computador para realizar qualquer alteração necessária no código-fonte, e para transferir os códigos para os microcontroladores correspondentes.
+- Ter uma conta no Telegram, e o aplicativo instalado.
+- Criar um Bot no Telegram e pegar a chave Token do Bot criado (use o [BotFather](https://t.me/BotFather) para realizar este processo).
+- Identificar o seu ID de usuário no Telegram (use o [IDBot](https://t.me/myidbot) para realizar essa etapa).
 <br><br><br><br><br>
 
 
@@ -85,7 +85,12 @@ Para utilizar o projeto, alguns requisitos são necessário:
 | **TOTAL**              ||| **R$ 340,01** |
 <br>
 
-:exclamation: **OBS:** *os valores sofrer alterações, a depender de diversos fatores. Como, por exemplo: o local onde será comprado os componentes.*
+> [!NOTE]
+> *Os valores estão sujeitos à alterações, a depender de diversos fatores.*
+
+> [!NOTE]
+> *Não foi considerado o gasto com a fiação do projeto.*
+
 <br><br><br><br><br>
 
 
