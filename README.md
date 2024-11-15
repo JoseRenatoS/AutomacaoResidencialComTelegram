@@ -102,4 +102,4 @@ Para utilizar o projeto, alguns requisitos são necessário:
 
 ## :bookmark_tabs: Referências
 
-Repositório da biblioteca utilizada para fazer a conexão entre o ESP32 e o API do Telegram Bot: [Universal Telegram Bot Library](https://github.com/witnessmenow/Universal-Arduino-Telegram-Bot?tab=readme-ov-file)
+Repositório da biblioteca [Universal Telegram Bot Library](https://github.com/witnessmenow/Universal-Arduino-Telegram-Bot?tab=readme-ov-file) utilizada para fazer a conexão entre o ESP32 e o API do Telegram Bot.
