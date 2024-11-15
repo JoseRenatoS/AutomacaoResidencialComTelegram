@@ -74,7 +74,6 @@ void TemperaturaUmidade() {
   if(h < 80.00 && t >= 25.00 && stateVentilaSala == false) {
     digitalWrite(sala_Ventilacao, HIGH);                                                                     // ativa a ventilação da sala
     Serial.println("ventilação sala ativada");                                                               // envia a mensagem para o monitor serial
-    //mensagemTempUmid = "Temperatura: " + valorTemp + "ºC\nUmidade: " + valorUmid + "%\t";                    // armazena os valores na variável "mensagemTempUmid" com uma mensagem
     mySerial.println(mensagemTempUmid);                                                                      // envia uma mensagem da variável para a serial secundária: mySerial (ESP32)
     delay(200);                                                                                              // atraso de 200 milissegundos
     mySerial.println("Ventilação da sala ativada. \nUmidade baixa e temperatura alta. Se hidrate!!!\t");     // envia uma mensagem para a serial secundária: mySerial (ESP32)
@@ -83,7 +82,6 @@ void TemperaturaUmidade() {
   } else if(h >= 80.00 && t <= 25.00 && stateVentilaSala == true) {
     digitalWrite(sala_Ventilacao, LOW);                                                                      // desliga a ventilação da sala
     Serial.println("ventilação sala desativada");                                                            // envia a mensagem para o monitor serial
-    //mensagemTempUmid = "Temperatura: " + valorTemp + "ºC\nUmidade: " + valorUmid + "%\t";                    // armazena os valores na variável "mensagemTempUmid" com uma mensagem
     mySerial.println(mensagemTempUmid);                                                                      // envia uma mensagem da variável para a serial secundária: mySerial (ESP32)
     delay(200);                                                                                              // atraso de 200 milissegundos
     mySerial.println("A ventilação na sala foi desligada.");                                                 // envia uma mensagem para a serial secundária: mySerial (ESP32)
@@ -147,16 +145,16 @@ void setup() {
 
   dht.comeco();                             // inicializa o Sensor de Umidade e de Temperatura (DHT11)
 
-  pinMode(sala_Ventilacao, OUTPUT);         // pino 2 - saída
-  pinMode(cozinha_Ventilacao, OUTPUT);      // pino 3 - saída
+  pinMode(sala_Ventilacao, OUTPUT);         // pino 6 - saída
+  pinMode(cozinha_Ventilacao, OUTPUT);      // pino 5 - saída
   pinMode(irrigador, OUTPUT);               // pino 4 - saída
-  pinMode(LedRed, OUTPUT);                  // pino 5 - saída
-  pinMode(buzzer, OUTPUT);                  // pino 5 - saída
-  digitalWrite(sala_Ventilacao, LOW);       // pino 2 - baixo
-  digitalWrite(cozinha_Ventilacao, LOW);    // pino 3 - baixo
+  pinMode(LedRed, OUTPUT);                  // pino 3 - saída
+  pinMode(buzzer, OUTPUT);                  // pino 2 - saída
+  digitalWrite(sala_Ventilacao, LOW);       // pino 6 - baixo
+  digitalWrite(cozinha_Ventilacao, LOW);    // pino 5 - baixo
   digitalWrite(irrigador, LOW);             // pino 4 - baixo
-  digitalWrite(LedRed, LOW);                // pino 5 - baixo
-  digitalWrite(buzzer, LOW);                // pino 5 - baixo
+  digitalWrite(LedRed, LOW);                // pino 3 - baixo
+  digitalWrite(buzzer, LOW);                // pino 2 - baixo
   delay(3000);                              // Atraso de 3 segundos
 }
 
