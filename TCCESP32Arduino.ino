@@ -19,7 +19,7 @@ HardwareSerial SerialPort(2);                       // determina o pino 16 como 
 #define sensorChama 39                              // pino 39 - sensor de chama (digital)
 #define sensorGas 35                                // pino 35 - sensor de gás (analógico)
 #define sensorUmidadeSolo 34                        // pino 34 - sensor de umidade do solo (analógico)
-#define sensorMovimento 14                          // pino 14 - sensor de movimento (digital)
+#define sensorMovimento 19                          // pino 19 - sensor de movimento (digital)
 #define sensorLDR 36                                // pino 36 - sensor LDR (analógico)
 #define salaLuz 5                                   // pino  5 - luz da sala
 #define cozinhaLuz 21                               // pino 21 - luz da cozinha
