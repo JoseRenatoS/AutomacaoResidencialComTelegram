@@ -96,6 +96,7 @@ Para utilizar o projeto, alguns requisitos são necessário:
 
 
 ## :memo: Licença
+Este projeto está licenciado nos termos da licença...
 <br><br><br><br><br>
 
 
