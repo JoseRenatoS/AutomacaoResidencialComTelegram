@@ -25,7 +25,7 @@
 
 
 ## :house: Descrição do Projeto
-Trata-se do Trabalho de Conclusão de Curso, do Curso de Engenharia Elétrica. Foi desenvolvimento o protótipo de um sistema de automação residencial que pode ser controlado e monitorado pelo aplicativo de comunicação Telegram.
+Trata-se do Trabalho de Conclusão de Curso, do Curso de Engenharia Elétrica. Foi desenvolvimento um protótipo de um sistema de automação residencial controlado e monitorado pelo aplicativo de comunicação Telegram.
 - *arquivo "TCCArduinoESP32.ino" é o código usado no Arduino*
 - *arquivo "TCCESP32Arduino.ino" é o código usado no ESP32*
 <br><br><br><br><br>
@@ -35,13 +35,13 @@ Trata-se do Trabalho de Conclusão de Curso, do Curso de Engenharia Elétrica. F
 ## :hammer: Funcionalidades do projeto
 
 - `Sistema de Iluminação Interna`: responsável pela iluminação interna da residência, localizado nos cômodos: sala, cozinha, banheiro, quarto, área de serviço. A iluminação de cada ambiente é ligada e desligada, apenas, pelo Telegram.
-- `Sistema de Iluminação Externa`: responsável pela iluminação externa da residência, localizado no quintal. A iluminação é ligada apenas quando é detectado movimento no quintal e quando o ambiente está escuro, fora isso, a iluminação permanece desligada. O Telegram é responsável por ligar ou desligar esse sistema.
-- `Sistema de Alarme de Movimento`: responsável por detectar qualquer movimento no quintal, informando o usuário pelo Telegram sobre a situação (se foi ou não detectado movimento no quintal).
-- `Sistema de Alarme de Incêndio`: responsável por detectar chama na cozinha, informando o usuário pelo Telegram sobre a situação (se há incêndio ou não).
-- `Sistema de Alarme de Vazamento de Gás`: responsável por detectar vazamento de gás na cozinha, informando o usuário pelo Telegram sobre a situação (há vazamento de gás ou não. Caso seja detectado, uma ventoinha/cooler instalada na cozinha é acionada para dissipar o gás.
-- `Sistema de Ventilação da Sala`: responsável por monitorar a temperatura e a umidade da sala, quando a temperatura superar um determinado valor e a umidade estiver abaixo de um valor especifico, é enviado uma mensagem para o Telegram informando a situaçaõ e a ventoinha/cooler instalada na sala é ativada (para arejar o ambiente).
-- `Sistema de Irrigação do Jardim`: responsável por monitorar a umidade do solo (jardim). Caso seja detectado que o solo está seco (baixa umidade), o irrigador é acionado, e é desligado apenas quando for detectado que o solo está úmido (alta umidade).
-- `Sistema Integrado`: é a junção de todos os sistemas (visto na Figura 1). É possível monitorar a situação de todas os sistemas, sensores e tarefas (através do comando ``/status``) através do Telegram, além de ser possível controlar (ligar/desligar) todos os sistemas.
+- `Sistema de Iluminação Externa`: responsável pela iluminação externa da residência, localizado apenas no quintal. A iluminação é ligada apenas quando três condições são cumpridas: o sistema está ativado, o ambiente está escuro e é detectado movimento no quintal, fora isso, a iluminação permanece desligada. Este sistema é ligado e desligado pelo Telegram apenas.
+- `Sistema de Alarme de Movimento`: responsável por detectar qualquer movimento no quintal, informando o usuário pelo Telegram sobre uma posição invasão por exemplo. Este sistema é ligado e desligado  pelo Telegram apenas.
+- `Sistema de Alarme de Incêndio`: responsável por detectar chama na cozinha, informando o usuário pelo Telegram sobre a situação (se há algum incêndio ou não). Este sistema é ligado e desligado  pelo Telegram apenas.
+- `Sistema de Alarme de Vazamento de Gás`: responsável por detectar vazamento de gás na cozinha, informando o usuário pelo Telegram sobre a situação (há algum vazamento de gás ou não). Caso seja detectado, uma ventoinha instalada na cozinha é acionada para ajudar a dissipar o gás. Este sistema é ligado e desligado  pelo Telegram apenas.
+- `Sistema de Ventilação da Sala`: responsável por monitorar a temperatura e a umidade da sala, quando a temperatura ultrapassa um determinado valor e a umidade está abaixo de um valor especifico, é enviado uma mensagem para o Telegram informando a situação e a ventoinha, instalada na sala, é ativada para arejar o cômodo. Este sistema é ligado e desligado  pelo Telegram apenas, além disso, é possível solicitar (através do comando ``/temp_umid``) as informações de temperatura e umidade da sala através do app.
+- `Sistema de Irrigação do Jardim`: responsável por monitorar a umidade do solo (jardim ou vaso de planta). Caso seja detectado que o solo está seco (baixa umidade), o irrigador é acionado, e é desligado apenas quando for detectado que o solo está úmido (alta umidade). Este sistema é ligado e desligado  pelo Telegram apenas.
+- `Sistema Integrado`: é a junção de todos os sistemas (visto na Figura 1). É possível monitorar a situação de todas os sistemas, sensores e tarefas (através do comando ``/status``) através do Telegram, além de ser possível controlar (ligar/desligar) cada sistema individualmente.
 <br><br><br><br><br>
 
 
@@ -82,7 +82,7 @@ Para utilizar o projeto, alguns requisitos são necessário:
 | Protoboard 170 pinos | 3,90 | 2 | 7,80 |
 | Fonte Bivolt 9V/1A | 11,52 | 2 | 23,04 |
 | Fonte Ajustável para Protoboard | 8,12 | 2 | 16,34 |
-| **TOTAL**              ||| **R$ 340,01** |
+| **TOTAL**              ||| **R$ 340,02** |
 <br>
 
 > [!NOTE]
