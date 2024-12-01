@@ -1,7 +1,7 @@
 # Sistema de Automação Residencial Controlado e Monitorado via Telegram
 
 <p align="center">
-  <img src="http://img.shields.io/static/v1?label=STATUS&message=ANDAMENTO&color=GREEN&style=for-the-badge"/>
+  <img src="http://img.shields.io/static/v1?label=STATUS&message=CONCLUIDO&color=GREEN&style=for-the-badge"/>
 </p>
 
 <p align="center">
