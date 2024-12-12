@@ -5,15 +5,15 @@
 #include <HardwareSerial.h>                         // permite o uso de portas seriais de hardware do ESP32, além da serial padrão.                      
 
 // Inicializando a conexao Wi-Fi
-char ssid[] = "NomeDoWifi";                             // nome da rede Wi-Fi
+char ssid[] = "NomeDoWifi";                         // nome da rede Wi-Fi
 char password[] = "SenhaDoWifi";                    // senha da rede Wi-Fi
 
 HardwareSerial SerialPort(2);                       // determina o pino 16 como RX (receber dados do Arduino) e o pino 17 como TX (enviar dados para o Arduino)             
 
 //Inicializa o BOT Telegram
-#define BOTtoken "chaveToken"          // define 'BOTtoken' com a chave Token do BOT
+#define BOTtoken "chaveToken"                       // define 'BOTtoken' com a chave Token do BOT
 
-#define ID_CHAT "IDTelegramUsuario"                                               // define "ID_CHAT" com a ID do Telegram do usuario
+#define ID_CHAT "IDTelegramUsuario"                 // define "ID_CHAT" com a ID do Telegram do usuario
 
 
 #define sensorChama 39                              // pino 39 - sensor de chama (digital)
@@ -266,6 +266,7 @@ void handleNewMessages(int numNewMessages) {                     // Declaração
       state_Sistema_Temp_Umid = true;                                                 // Ativa o sistema de temperatura e umidade (ventilação da sala)
       SerialPort.println("ventila_sala_on");                                          // Envia o comando "ventila_sala_on" para o monitor serial SerialPort (Arduino via UART2), para ativar o sistema de ventilação da sala no Arduíno
       bot.sendMessage(chat_id, "Sistema de Ventilação da sala ATIVADO", "");          // envia mensagem para o Telegram
+    
     } else if (text.startsWith("/ventila_sala_off")) {                                // verifica se o texto inicia com "/ventila_sala_off"
       state_Sistema_Temp_Umid = false;                                                // Desativa o sistema de temperatura e umidade (ventilação da sala)
       SerialPort.println("ventila_sala_off");                                         // Envia o comando "ventila_sala_on" para o monitor serial SerialPort (Arduino via UART2), para desligar a ventilação da sala
@@ -296,6 +297,7 @@ void handleNewMessages(int numNewMessages) {                     // Declaração
     } else if (text.startsWith("/temp_umid")) {                                       // verifica se o texto inicia com "/temp_umid"
       SerialPort.println("temp_umid");                                                //  Envia o comando "temp_umid" para o Arduino via UART2
       delay(500);                                                                     // atraso de 500 milissegundos
+    
     } else {                                                                          // exibe as opções de atividades
       String keyboardJson = "[[\"/sala_on\", \"/sala_off\", \"/cozinha_on\", \"/cozinha_off\"], [\"/quarto_on\", \"/quarto_off\", \"/banheiro_on\", \"/banheiro_off\"], [\"/area_on\", \"/area_off\", \"/quintal_on\", \"/quintal_off\"], [\"/ventila_sala_on\", \"/ventila_sala_off\", \"/ventila_cozinha_on\", \"/ventila_cozinha_off\"], [\"/alarmePIR_on\", \"/alarmePIR_off\", \"/irrigador_on\", \"/irrigador_off\"], [\"/temp_umid\", \"/status\"]]";
       bot.sendMessageWithReplyKeyboard(chat_id, "Bem-vindo ao Painel de Controle de sua Residencial.\nO que deseja fazer? Escolha uma das opções abaixo:", "", keyboardJson, true);
@@ -384,12 +386,12 @@ void irrigacao() {
   // caso não seja mais detectado solo seco, apenas solo úmido (valores abaixo de 70), o segundo bloco é executado (1x)
   
   if(state_Sistema_Irrigacao == 1) {
-    if(state_Sensor_Umidade_Solo > 70 && irrigacao_Anterior == false) {
+    if(state_Sensor_Umidade_Solo >= 70 && irrigacao_Anterior == false) {
       SerialPort.println("irrigador_on");                                  // Envia o comando "irrigador_on" para o Arduino via UART2, para acionar o irrigador
       delay(250);                                                          // atraso de 250 milissegundos
       envioMensagem("Solo seco - Irrigador ativado.");                     // Envia a mensagem para o Telegram 
       irrigacao_Anterior = true;                                           // Atualiza o estado da variavel "irrigacao_Anterior"
-    } else if (state_Sensor_Umidade_Solo <= 70 && irrigacao_Anterior == true) {
+    } else if (state_Sensor_Umidade_Solo < 70 && irrigacao_Anterior == true) {
       SerialPort.println("irrigador_off");                                 // Envia o comando "irrigador_off" para o Arduino via UART2, para acionar o irrigador
       delay(250);                                                          // atraso de 250 milissegundos
       envioMensagem("Solo úmido - Irrigador desativado.");                 // Envia a mensagem para o Telegram
@@ -442,22 +444,22 @@ void iluminacaoExterna() {
                                
 
   if(state_Sistema_Luz_Externa == 1) {
-    if(state_Sensor_Movimento == 1  &&  state_LDR <= 65  &&  state_Luz_Quintal == false) {
+    if(state_Sensor_Movimento == 1  &&  state_LDR <= 60  &&  state_Luz_Quintal == false) {
       digitalWrite(quintalLuz, HIGH);
       delay(200);
       envioMensagem("Iluminação do Quintal ativada");
       state_Luz_Quintal = true;
-    } else if (state_Sensor_Movimento == 1  &&  state_LDR > 65  &&  state_Luz_Quintal == true) {
+    } else if (state_Sensor_Movimento == 1  &&  state_LDR > 60  &&  state_Luz_Quintal == true) {
       digitalWrite(quintalLuz, LOW);
       delay(200);
       envioMensagem("Iluminação do Quintal desativada");
       state_Luz_Quintal = false;
-    } else if (state_Sensor_Movimento == 0  &&  state_LDR <= 65  &&  state_Luz_Quintal == true) {
+    } else if (state_Sensor_Movimento == 0  &&  state_LDR <= 60  &&  state_Luz_Quintal == true) {
       digitalWrite(quintalLuz, LOW);
       delay(200);
       envioMensagem("Iluminação do Quintal desativada");
       state_Luz_Quintal = false;
-    } else if (state_Sensor_Movimento == 0  &&  state_LDR > 65  &&  state_Luz_Quintal == true) {
+    } else if (state_Sensor_Movimento == 0  &&  state_LDR > 60  &&  state_Luz_Quintal == true) {
       digitalWrite(quintalLuz, LOW);
       delay(200);
       envioMensagem("Iluminação do Quintal desativada");
