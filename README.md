@@ -100,7 +100,7 @@ Para utilizar o projeto, alguns requisitos são necessário:
 
 
 ## :memo: Licença
-Este projeto está licenciado nos termos da licença...
+Este projeto está licenciado nos termos da licença MIT.
 <br><br><br><br><br>
 
 
