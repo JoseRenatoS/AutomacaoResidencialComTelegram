@@ -100,11 +100,13 @@ Para utilizar o projeto, alguns requisitos são necessário:
 
 
 ## :memo: Licença
-Este projeto está licenciado nos termos da licença MIT.
+Este projeto está licenciado nos termos da [MIT License](https://github.com/JoseRenatoS/AutomacaoResidencialComTelegram/blob/main/LICENSE).
 <br><br><br><br><br>
 
 
 
 ## :bookmark_tabs: Referências
 
-Repositório da biblioteca [Universal Telegram Bot Library](https://github.com/witnessmenow/Universal-Arduino-Telegram-Bot?tab=readme-ov-file) utilizada para fazer a conexão entre o ESP32 e o API do Telegram Bot.
+* Repositório da biblioteca [Universal Telegram Bot Library](https://github.com/witnessmenow/Universal-Arduino-Telegram-Bot?tab=readme-ov-file) utilizada para fazer a conexão entre o ESP32 e o API do Telegram Bot.
+* A ideia de utilizar controle do sistema via Telegram, veio da inspiração do projeto [Telegram: Control ESP32/ESP8266 Outputs (Arduino IDE)](https://randomnerdtutorials.com/telegram-control-esp32-esp8266-nodemcu-outputs/) da Random Nerd Tutorials
+
