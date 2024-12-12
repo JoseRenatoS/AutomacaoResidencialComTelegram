@@ -54,6 +54,10 @@ Para utilizar o projeto, alguns requisitos são necessário:
 - Ter uma conta no Telegram, e o aplicativo instalado.
 - Criar um Bot no Telegram e pegar a chave Token do Bot criado (use o [BotFather](https://t.me/BotFather) para realizar este processo).
 - Identificar o seu ID de usuário no Telegram (use o [IDBot](https://t.me/myidbot) para realizar essa etapa).
+
+> [!NOTE]
+> *Caso não saiba criar o Bot no Telegram e identificar o ID do Usuário. Siga o passo a passo em [Random Nerd Tutorials](https://randomnerdtutorials.com/telegram-control-esp32-esp8266-nodemcu-outputs/).*
+
 <br><br><br><br><br>
 
 
